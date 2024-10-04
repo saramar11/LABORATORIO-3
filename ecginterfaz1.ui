@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1069</width>
+    <height>647</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="connect">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>110</y>
+      <width>121</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>CONECTAR</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="puertos">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="plainTextEdit">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>170</y>
+      <width>241</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <italic>true</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="plainText">
+     <string>Senal EMG captada</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="plainTextEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>151</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="plainText">
+     <string>Puertos disponibles:</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="plainTextEdit_3">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>170</y>
+      <width>261</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <italic>true</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="plainText">
+     <string>Senal EMG filtrada</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="senalEMG" native="true">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>220</y>
+      <width>451</width>
+      <height>311</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QWidget" name="senalFiltrada" native="true">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>220</y>
+      <width>451</width>
+      <height>321</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="plainTextEdit_4">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>20</y>
+      <width>581</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Palatino Linotype</family>
+      <pointsize>26</pointsize>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="plainText">
+     <string>LABORATORIO 3</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="plainTextEdit_5">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>120</y>
+      <width>241</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Sitka Banner Semibold</family>
+      <pointsize>14</pointsize>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="plainText">
+     <string>Señal EMG</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="plainTextEdit_6">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>560</y>
+      <width>201</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <italic>true</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="plainText">
+     <string>Mariana Garcia
+Sara Pinzon</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1069</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
