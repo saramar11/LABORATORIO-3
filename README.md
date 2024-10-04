@@ -211,6 +211,8 @@ Para que se relizara durante todo el tiempo de la toma de datos, se creó un vec
 
 Para conocer el ancho del segmento, se utilizaron los contadores que se mencionaron al inicio que marcaban el inicio de la contracción una vez superado el umbral de 0.77 y el contador que marcaba el final de la contracción una vez superado el umbral de -0.77. 
 
+Con el procedimiento realizado, las gráficas observadas y las ventanas aplicadas se puede determinar que a pesar de que al implementar la ventana hanning comienza a filtrar a partir desde el 0 mientras que la Hamming no, por esta razón se desea continuar con el procesamiento de la señal con la aplicación de las ventanas Hanning ya que provee un mayor suavizado a la señal EMG sin necesidad de perder información de mayor relevancia. 
+
 
 
 
