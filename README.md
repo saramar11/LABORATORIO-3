@@ -7,6 +7,58 @@ El propósito del presente laboratorio se basa en adquirir una señal EMG median
 
 
 ## Sistema de adquisición
+Para la adquisición de los datos correspondientes a cada contracción se realizó un codigo en python el cual aplicará los filtros digitales tratados más adelante y conectara con el código de arduino que estará enlazado con el sensor conectado en el bíceps  junto a esto también se verán reflejados los datos tomados por el sensor y los datos filtrados por medio de una interfaz gráfica que la cual tendrá el acceso a la coneccion serial con el sensor para dar inicio a la toma de datos usando a cada una de las siguientes librerías 
+
+	import sys
+	from PyQt6 import uic
+	from PyQt6.QtWidgets import QMainWindow, QApplication, QVBoxLayout
+	import serial.tools.list_ports
+	import serial
+	import threading
+	from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+
+**Libreria "sys":** Funciona como la librería estándar de python.
+
+**Libreria "Pyqt6.iuc":**usada para los elementos qt esto hace parte de la interfaz gráfica que mostrará la señal obtenida del sensor y la señal filtrada.
+
+**Libreria "serial.tools.list_ports:"**Esta es la encargada de la comunicación  serial.
+
+class Principal(QMainWindow):
+    def __init__(self):
+        super(Principal, self).__init__()
+        uic.loadUi("ecginterfaz1.ui", self)
+        self.puertos_disponibles()
+        self.ser = None
+        self.connect.clicked.connect(self.conectar)
+        self.data_grabados = []  # Almacena los datos grabados
+
+        # Configuración de la gráfica de la señal cruda
+        self.fig = Figure()
+        self.ax = self.fig.add_subplot(111)
+        self.canvas = FigureCanvas(self.fig)
+        layout = QVBoxLayout()
+        layout.addWidget(self.canvas)
+        self.senalEMG.setLayout(layout)
+
+        # Configuración de la gráfica de la señal filtrada
+        self.figA = Figure()
+        self.axA = self.figA.add_subplot(111)
+        self.canvasA = FigureCanvas(self.figA)
+        layoutA = QVBoxLayout()
+        layoutA.addWidget(self.canvasA)
+        self.senalFiltrada.setLayout(layoutA)
+
+        # Parámetros del filtro
+        self.fs = 1000.0  # Frecuencia de muestreo (Hz)
+        self.fc_low = 50.0  # Frecuencia de corte inferior (Hz)
+        self.fc_high= 150.0 #frecuencia de corte superior
+        self.w_low = self.fc_low / (self.fs / 2)  # Normalizar frecuencia de corte inferior
+        self.w_high = self.fc_high / (self.fs / 2) 
+        self.b, self.a = butter(4,  [self.w_low, self.w_high], btype='band')  # Crear filtro Butterworth de orden 4
+
+Se inicia con la creación de la clase principal la cual estará conectada a la interfaz gráfica por Pqt6. se continua con la inicialización de las ventanas en la interfaz, seguido a esto se procede con el llamado de los puestos disponibles para la comunicación serial, se asigna el botón de conexión para empezar con la comunicación serial mediante el puerto seleccionado. para luego almacenar los datos adquiridos por el sensor para de esta forma proceder con las gráficas de la señal obtenida y llamando a la que será la grafica de la señal filtrada mediante el diseño de los parametros del filtros para ser aplicados en la señal cruda, para esto se realizo la normalización de las frecuencias de corte y se dividen por la frecuencia de muestreo para de esta forma obtener un filtro pasabanda encargado de filtrar lo mejor posible la señal eliminando ruido y datos innecesarios 
+
+
 
 
 ## Procesamiento de la señal 
