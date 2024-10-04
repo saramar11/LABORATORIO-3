@@ -49,5 +49,24 @@ Inicialmente en el main, se debe realizar la lectura del archivo txt que fue obt
 Teniendo en cuenta a la bibliografía, para lograr filtrar una señal EMG se debe realizar un filtro BandPass, en otras palabras un filtro de frecuencias pasa altas con una frecuencia de corte en 50 Hz con un filtro pasa bajos con frecuencia de corte de 500 Hz. Esto con el fin de que la señal original recupere únicamente la señal que se encuentre entre este rango de frecuencias ya que según la bibliografía es donde se encuentra el canal de información de una señal de EMG. Se utiliza un valor menor a la frecuencia de corte superior para que pueda cumplir los parámetros de frecuencia natural del filtro con respecto a la señal. Debido a esto para cumplir con el teorema de nyquist, la frecuencia de muestreo debe ser 2 veces la frecuencia maxima que se esté tomando, es decir 500 Hz, por esta razón *fs=1000*.  Así mismo se estipulo que el orden del filtro fuera de 5 ya que con este se puede obtener una pendiente más pronunciada en las frecuencias de corte.
 
  
+	# Filtrar la señal EMG
+    emg_filtered = butter_bandpass_filter(emg_data, lowcut, highcut, fs, order)
+
+Posterior a esto, se realiza el llamado a la definición del filtro tipo butterworth bandpass en la cual se toma en arreglo unidimensional que contiene a los valores de la señal EMG originales, junto con las frecuencias de corte, el orden del filtro y la frecuencia de muestreo y se envía a esta definición la cual se estará mencionando más adelante.
+
+Una vez con la señal filtrada se procede a realizar el aventanamiento de cada contracción, con esto en el main se llama a la definición de *hanning_window* y * hamming_window* con el fin de poder graficarlas con respecto a la señal filtrada original observando la forma en la que se suaviza la señal usando estas diferentes técnicas. 
+
+	 # Aplicar la ventanas
+    emg_hanning, ventanas_hanning, respuestas_fft, tiempos_contracciones, frecuencias_medianas = hanning_window(emg_filtered, fs)
+    emg_hamming = hamming_window(emg_filtered)
+
+Finamente, para lograr graficar de debe realizar un vector que sea de tiempo el cual tenga la misma longitud de la señal filtrada para utilizarlo en el plot de las gráficas:
+
+    # Crear el eje de tiempo basado en la cantidad de datos
+    tiempo = np.arange(len(emg_data)) / fs
+
+
+
+
 
 
