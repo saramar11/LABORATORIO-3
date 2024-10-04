@@ -65,6 +65,34 @@ Finamente, para lograr graficar de debe realizar un vector que sea de tiempo el 
     # Crear el eje de tiempo basado en la cantidad de datos
     tiempo = np.arange(len(emg_data)) / fs
 
+En esta parte final de la definición del main se procedió a hacer las gráficas pertinentes para el análisis de este procesamiento.
+
+Inicialmente se muestra un subplot en el cual se encuentra la gráfica que contiene los datos originales del archivo txt de la señal que fue adquirida previamente en el código ya mencionado mediante el siguiente código.
+
+ 	#Gráfico de la senal original
+    plt.subplot(2,1,1)
+    plt.plot(tiempo, emg_data, label='Señal EMG Original')
+    plt.xlabel('Tiempo (s)')
+    plt.ylabel('Señal EMG')
+    plt.title('Señal EMG Original')
+    plt.grid()
+
+    
+    # Gráfico de la señal filtrada
+    plt.subplot(2,1,2)
+    plt.plot(tiempo, emg_filtered, label='Señal EMG Filtrada', color='orange')
+    plt.xlabel('Tiempo (s)')
+    plt.ylabel('Señal EMG Filtrada')
+    plt.title('Señal EMG Filtrada')
+    plt.grid()
+    plt.tight_layout()
+    plt.show()
+
+Obteniendo así la siguiente imagen.
+
+[![Senal-Originaly-Filtrada.png](https://i.postimg.cc/LszzFfX8/Senal-Originaly-Filtrada.png)](https://postimg.cc/SXxXWnCB)
+
+Posterior a esto se grafican una superposición entre la señal filtrada con la señal con las ventanas hamming y hanning, esto con el fin de observar y comparar la forma en la que se suaviza la señal y cual conviene mas para lograr un balance entre pérdida de información con limpieza de señal.
 
 
 
