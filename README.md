@@ -154,6 +154,14 @@ Teniendo en cuenta lo anterior se inicia con la definición de cada una de las f
 
 - **actualizar_grafica**: Con esto se realiza la correspondiente actualización de la señal con el fin de mostrar los datos guardados después de la desconexión del puerto serial 
 
+|if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    ventana = Principal()
+    ventana.show()  # Mostrar la interfaz gráfica
+    sys.exit(app.exec())
+
+Finalmente se visualiza el punto de entrada para la ejecucion del codigo, en donde se verifica que el archivo esté ejecutando correctamente para la creación de un instancia con el fin de conectar correctamente con la aplicación de las gráficas mostrando así la ventana principal de la interfaz junto con las correspondientes ventanas definidas anteriormente. con esto se procede con el bucle encargado de almacenar los datos y mostrarlos después de la desconexión serial.
+
 
 
 
