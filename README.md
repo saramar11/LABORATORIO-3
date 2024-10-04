@@ -58,6 +58,7 @@ class Principal(QMainWindow):
 
 Se inicia con la creación de la clase principal la cual estará conectada a la interfaz gráfica por Pqt6. se continua con la inicialización de las ventanas en la interfaz, seguido a esto se procede con el llamado de los puestos disponibles para la comunicación serial, se asigna el botón de conexión para empezar con la comunicación serial mediante el puerto seleccionado. para luego almacenar los datos adquiridos por el sensor para de esta forma proceder con las gráficas de la señal obtenida y llamando a la que será la grafica de la señal filtrada mediante el diseño de los parametros del filtros para ser aplicados en la señal cruda, para esto se realizo la normalización de las frecuencias de corte y se dividen por la frecuencia de muestreo para de esta forma obtener un filtro pasabanda encargado de filtrar lo mejor posible la señal eliminando ruido y datos innecesarios 
 
+[![Whats-App-Image-2024-10-03-at-12-01-53-AM.jpg](https://i.postimg.cc/4NgMtbCX/Whats-App-Image-2024-10-03-at-12-01-53-AM.jpg)](https://postimg.cc/qg1jHKMF)
 
 	  def puertos_disponibles(self):
         p = serial.tools.list_ports.comports()
