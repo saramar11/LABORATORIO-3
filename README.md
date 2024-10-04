@@ -343,6 +343,10 @@ Con el procedimiento realizado, las gráficas observadas y las ventanas aplicada
 
 
 
+Teniendo en cuenta el analisis espectral que se hizo por cada ventana de acuerdo a las contracciones, se puede determinar gracias a la mediana de las frecuencias en la forma como esta va disminuyendo como el musculo se va acercando acada vez mas a la fatiga, hasta llegar a la contraccion final donde la mediana de la frecuencia en la menor con un valor de 166.7 Hz. Confirmando lo que se consideró desde un inicio donde conforme se va aproximando el musculo a la fatiga muscular menor sera la frecuencia en su espectro.
+
+
+
 
 
 
