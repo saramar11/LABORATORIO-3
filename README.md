@@ -13,10 +13,15 @@ El propósito del presente laboratorio se basa en adquirir una señal EMG median
 
 Para realizar el procesamiento del archivo txt que fue obtenido en el sistema de adquisición, se realizó un código aparte llamado **Labtres_spyder**.
 
-**import matplotlib.pyplot as plt
-import numpy as np
-from scipy.signal import butter,lfilter, windows
-from scipy.fftpack import fft**
+
+**import matplotlib.pyplot as plt**
+
+**import numpy as np**
+
+**from scipy.signal import butter,lfilter, windows**
+
+**from scipy.fftpack import fft**
+
 
 Utilizando estas librerías es posible cumplir con dicho objetivo del laboratorio, donde *matplotlib* es funcional para realizar las gráficas deseadas. *numpy* para realizar cálculos matemáticos e implementación de arreglos dentro del código. *scipy.signal* para la implementación de los filtros correspondientes para limpiar la señal EMG adquirida del ruido al que pudo estar sometida. Finalmente, se utilizó *scipy.fftpack* la cual es una librería funcional para realizar los cálculos respectivos de la transformada rápida de Fourier FFT requerido para realizar en análisis espectral de cada contracción.
 
