@@ -41,4 +41,13 @@ Inicialmente en el main, se debe realizar la lectura del archivo txt que fue obt
 
  Mediante estas líneas lo que se está haciendo es reconocer al archivo llamado *emg_data5.txt* siendo este el archivo que contiene a los datos del EMG para que sea leído. Es importante que este archivo  se encuentre en la misma carpeta en la que está guardado el código de procesamiento de la señal de Python para que pueda ser reconocido. Se inicializar un vector llamado *emg_data[]* en donde se estarán guardando los datos de archivos pero el txt contiene los archivos en un formato string, sin embargo para realizar los cálculos pertinentes se necesita que los valores se encuentren en formato float, y se van almacenando en el vector mencionado al inicio.
 
+ 	fs = 1000.0
+    lowcut = 50.0
+    highcut = 450.0
+    order = 5
+
+Teniendo en cuenta a la bibliografía, para lograr filtrar una señal EMG se debe realizar un filtro BandPass, en otras palabras un filtro de frecuencias pasa altas con una frecuencia de corte en 50 Hz con un filtro pasa bajos con frecuencia de corte de 500 Hz. Esto con el fin de que la señal original recupere únicamente la señal que se encuentre entre este rango de frecuencias ya que según la bibliografía es donde se encuentra el canal de información de una señal de EMG. Se utiliza un valor menor a la frecuencia de corte superior para que pueda cumplir los parámetros de frecuencia natural del filtro con respecto a la señal. Debido a esto para cumplir con el teorema de nyquist, la frecuencia de muestreo debe ser 2 veces la frecuencia maxima que se esté tomando, es decir 500 Hz, por esta razón *fs=1000*.  Así mismo se estipulo que el orden del filtro fuera de 5 ya que con este se puede obtener una pendiente más pronunciada en las frecuencias de corte.
+
+ 
+
 
