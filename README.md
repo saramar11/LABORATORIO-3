@@ -59,6 +59,101 @@ class Principal(QMainWindow):
 Se inicia con la creación de la clase principal la cual estará conectada a la interfaz gráfica por Pqt6. se continua con la inicialización de las ventanas en la interfaz, seguido a esto se procede con el llamado de los puestos disponibles para la comunicación serial, se asigna el botón de conexión para empezar con la comunicación serial mediante el puerto seleccionado. para luego almacenar los datos adquiridos por el sensor para de esta forma proceder con las gráficas de la señal obtenida y llamando a la que será la grafica de la señal filtrada mediante el diseño de los parametros del filtros para ser aplicados en la señal cruda, para esto se realizo la normalización de las frecuencias de corte y se dividen por la frecuencia de muestreo para de esta forma obtener un filtro pasabanda encargado de filtrar lo mejor posible la señal eliminando ruido y datos innecesarios 
 
 
+	  def puertos_disponibles(self):
+        p = serial.tools.list_ports.comports()
+        for port in p:
+            self.puertos.addItem(port.device)
+
+    def conectar(self):
+        estado = self.connect.text()
+        self.stop_event_ser = threading.Event()
+        if estado == "CONECTAR":
+            com = self.puertos.currentText()
+            try:
+                self.ser = serial.Serial(com, 115200)  # Conexión a 115200 bps
+                self.hilo_ser = threading.Thread(target=self.grabar_datos)
+                self.hilo_ser.start()
+                print("Puerto serial conectado")
+                self.connect.setText("DESCONECTAR")
+            except serial.SerialException as e:
+                print("Error en el puerto serial: ", e)
+        else:
+            if self.ser:
+                self.ser.close()
+            self.stop_event_ser.set()
+            self.hilo_ser.join()
+            print("Puerto serial desconectado")
+            self.connect.setText("CONECTAR")
+            self.actualizar_grafica()  # Actualiza la gráfica al desconectar
+            self.filtrar_senal()
+
+    def grabar_datos(self):
+        while not self.stop_event_ser.is_set():
+            if self.ser is not None and self.ser.is_open:
+                try:
+                    data = self.ser.readline().decode('utf-8').strip()
+                    if data.replace('.', '', 1).isdigit():  # Verificar que los datos son válidos
+                        value = float(data)
+                        self.data_grabados.append(value)
+                        print(f"Valor recibido: {value}")
+                except serial.SerialException as e:
+                    print(f"Error al leer del puerto serial: {e}")
+                    break
+        self.guardar_datos()
+
+    def guardar_datos(self):
+        with open('emg_data.txt', 'w') as file:
+            for valor in self.data_grabados:
+                file.write(f"{valor}\n")
+        print(f"Datos guardados, último valor: {valor}")
+
+    def filtrar_senal(self):
+        if len(self.data_grabados) > 0:
+            # Aplicar el filtro Butterworth a los datos grabados
+            filtered_data = filtfilt(self.b, self.a, self.data_grabados)
+
+            # Crear el eje de tiempo en milisegundos
+            tiempo = np.arange(len(filtered_data)) * (1000.0 / self.fs)
+
+            # Actualizar gráfica de señal filtrada
+            self.axA.clear()
+            self.axA.plot(tiempo, filtered_data, label="Señal Filtrada")
+            self.axA.set_xlabel("Tiempo (ms)")  # Eje X en milisegundos
+            self.axA.set_ylabel("Amplitud (V)")  # Eje Y en voltios
+            self.axA.grid(True)
+            self.axA.legend()
+            self.canvasA.draw()  
+            print("Gráfica de señal filtrada dibujada")
+
+    def actualizar_grafica(self):
+        if len(self.data_grabados) > 0:
+            # Crear el eje de tiempo en milisegundos
+            tiempo = np.arange(len(self.data_grabados)) * (1000.0 / self.fs)
+
+            # Actualizar gráfica de señal cruda
+            self.ax.clear()
+            self.ax.plot(tiempo, self.data_grabados, label="Señal Capturada")
+
+            # Configuración de la gráfica
+            self.ax.set_title('Señal EMG Capturada')
+            self.ax.set_xlabel('Tiempo (ms)')  # Eje X en milisegundos
+            self.ax.set_ylabel('Voltaje (V)')  # Eje Y en voltios
+            self.ax.legend()
+            self.ax.grid(True)
+            self.canvas.draw()
+
+Teniendo en cuenta lo anterior se inicia con la definición de cada una de las funciones las cuales estarán relacionadas con la conexión del puerto serial y la captura de de los datos provenientes del sensor. con esto en mente se inicia con:
+
+- La funcion **puertos_diponibles**: Encargados de dar la visualización de los puertos disponibles en el computador.
+
+- **conectar**: Este maneja la conexión y desconexión del puerto serial.
+
+- **grabar_datos**: Captura los datos desde el puerto serial y los envía a un bucle para después de la desconexión mostrar los datos guardados por medio del uso de un hilo 
+- **filtrar_senal**: Se inicia con la implementación del filtro Butterworth definido anteriormente para aplicar el filtrado a la señal y después mediante **self.canvasA.draw()** redibujar la señal filtrada en la interfaz mostrando la en un nuevo widget
+
+- **actualizar_grafica**: Con esto se realiza la correspondiente actualización de la señal con el fin de mostrar los datos guardados después de la desconexión del puerto serial 
+
+
 
 
 ## Procesamiento de la señal 
