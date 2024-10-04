@@ -199,7 +199,21 @@ Teniendo en cuenta a la bibliografía, para lograr filtrar una señal EMG se deb
 	# Filtrar la señal EMG
     emg_filtered = butter_bandpass_filter(emg_data, lowcut, highcut, fs, order)
 
-Posterior a esto, se realiza el llamado a la definición del filtro tipo butterworth bandpass en la cual se toma en arreglo unidimensional que contiene a los valores de la señal EMG originales, junto con las frecuencias de corte, el orden del filtro y la frecuencia de muestreo y se envía a esta definición la cual se estará mencionando más adelante.
+Posterior a esto, se realiza el llamado a la definición del filtro tipo butterworth bandpass en la cual se toma en arreglo unidimensional que contiene a los valores de la señal EMG originales, junto con las frecuencias de corte, el orden del filtro y la frecuencia de muestreo y se envía a esta definición.
+
+### Def filtro Butterworth BP
+
+Para esto, se realizó un filtro tipo Butterworth de bandpass teniendo en cuenta lo mencionado anteriormente de las frecuencias de corte y como esta opción de filtro puede dar como resultado una mayor pendiente de atenuación en las frecuencias de corte.
+
+Con esto fue necesario realizar dos funciones en total, una que diera los criterios necesarios que debía tener un filtro BP tipo Butterworth con las frecuencias de corte, la mitad de la frecuencia de muestreo y los coeficientes a y b que son del numerador y denominador respectivamente del filtro.
+
+	def butter_bandpass(lowcut, highcut, fs, order=5):
+    nyq = 0.5 * fs
+    low = lowcut / nyq
+    high = highcut / nyq
+    b, a = butter(order, [low, high], btype='band')
+    return b, a
+
 
 Una vez con la señal filtrada se procede a realizar el aventanamiento de cada contracción, con esto en el main se llama a la definición de *hanning_window* y * hamming_window* con el fin de poder graficarlas con respecto a la señal filtrada original observando la forma en la que se suaviza la señal usando estas diferentes técnicas. 
 
