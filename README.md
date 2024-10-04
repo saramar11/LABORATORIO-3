@@ -345,6 +345,10 @@ Una vez escogida este tipo de técnica para el aventanamiento, se realizó dentr
 
 Se realizó una gráfica con cada contracción de su espectro de frecuencia. Con esto, dentro de esta misma función de aplicación de la ventana la mediana aritmética del valor de las frecuencias presentes en esa contracción esperando que conforme haya más contracciones habrá una disminución de esta marcando así la fatiga que tiene el músculo.
 
+Gráfica para el análisis espectral de la primera contracción:
+
+[![Figure-2024-10-04-101112-3.png](https://i.postimg.cc/HnbxhFkp/Figure-2024-10-04-101112-3.png)](https://postimg.cc/p5XR9Gj7)
+
 Grafica para el analisis espectral de la ultima contracción:
 
 [![Figure-2024-10-04-101112-18.png](https://i.postimg.cc/6QK7xWGD/Figure-2024-10-04-101112-18.png)](https://postimg.cc/bZ6YQjgT)
