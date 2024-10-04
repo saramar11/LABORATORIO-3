@@ -146,6 +146,73 @@ Obteniendo así la siguiente imagen.
 
 Posterior a esto se grafican una superposición entre la señal filtrada con la señal con las ventanas hamming y hanning, esto con el fin de observar y comparar la forma en la que se suaviza la señal y cual conviene mas para lograr un balance entre pérdida de información con limpieza de señal.
 
+Obteniendo así: 
+
+*Señal con ventana Hanning aplicada para cada contracción*
+
+[![hanning.png](https://i.postimg.cc/SKyKjzds/hanning.png)](https://postimg.cc/bZBPBrKc)
+
+*Señal con ventana Hamming aplicada para cada contracción*
+
+[![hamming.png](https://i.postimg.cc/zGNhSvpm/hamming.png)](https://postimg.cc/ykfW7Vwn)
+
+### Aplicación de ventanas 
+
+Para aplicar las ventanas primero que nada fue fundamental observar la señal EMG que está siendo filtrada, para así lograr colocar unos umbrales y así cada vez que superara ambos umbrales los contara como una contracción y se le aplicara a ella la ventana correspondiente.
+
+Ejemplo del conteo de la contracción teniendo en cuenta los umbrales establecidos de acuerdo a lo observado por la señal filtrada. 
+
+	def hanning_window(data, fs):
+     windowed_signal = np.copy(data)
+     umbral_inicio = 0.77
+     umbral_fin = -0.77
+     i = 0
+	  while i < len(data):
+         if data[i] > umbral_inicio:
+             inicio_contraccion = i
+             
+             while i < len(data) and data[i] > umbral_fin:
+                 i += 1
+             
+             fin_contraccion = i
+             ancho_segmento = fin_contraccion - inicio_contraccion
+             
+             # Aplicar ventana de Hann
+             segmento = data[inicio_contraccion:fin_contraccion]
+             ventana_hann = windows.hann(ancho_segmento)
+             segmento_windowed = segmento * ventana_hann
+             ventanas.append(segmento_windowed)
+             
+             # Calcular FFT de la ventana
+             N = ancho_segmento  # Número de puntos en la FFT para mayor resolución
+             A = fft(segmento_windowed, N)
+             freqs = np.fft.fftfreq(N, 1/fs)[:N // 2]  # Solo frecuencias positivas
+             response = np.abs(A)[:N // 2]
+             
+             # Almacenar el tiempo promedio de la contracción para el eje X
+             tiempo_promedio_contraccion = (inicio_contraccion + fin_contraccion) / 2 / fs
+             tiempos_contracciones.append(tiempo_promedio_contraccion)
+             
+             # Calcular la frecuencia mediana y almacenar
+             frecuencia_median = np.median(freqs)
+             frecuencias_medianas.append(frecuencia_median)
+             print(f'Contracción {len(frecuencias_medianas)}: Frecuencia mediana = {frecuencia_median:.2f} Hz')
+             
+             respuestas_fft.append(response)
+             
+             # Reemplazar el segmento original con el aplicado la ventana de Hann
+             windowed_signal[inicio_contraccion:fin_contraccion] = segmento_windowed
+         else:
+             i += 1
+     
+     return windowed_signal, ventanas, respuestas_fft, tiempos_contracciones, frecuencias_medianas
+
+Para que se relizara durante todo el tiempo de la toma de datos, se creó un vector el cual contuviera los datos de las ventanas aplicadas cad vez que hubiera una contracción llamado *ventanas*.
+
+Para conocer el ancho del segmento, se utilizaron los contadores que se mencionaron al inicio que marcaban el inicio de la contracción una vez superado el umbral de 0.77 y el contador que marcaba el final de la contracción una vez superado el umbral de -0.77. 
+
+
+
 
 
 
