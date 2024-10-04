@@ -342,6 +342,9 @@ Para conocer el ancho del segmento, se utilizaron los contadores que se menciona
 Con el procedimiento realizado, las gráficas observadas y las ventanas aplicadas se puede determinar que a pesar de que al implementar la ventana hanning comienza a filtrar a partir desde el 0 mientras que la Hamming no, por esta razón se desea continuar con el procesamiento de la señal con la aplicación de las ventanas Hanning ya que provee un mayor suavizado a la señal EMG sin necesidad de perder información de mayor relevancia. 
 
 
+Grafica para el analisis espectral de la ultima contracción:
+
+[![Figure-2024-10-04-101112-18.png](https://i.postimg.cc/6QK7xWGD/Figure-2024-10-04-101112-18.png)](https://postimg.cc/bZ6YQjgT)
 
 Teniendo en cuenta el analisis espectral que se hizo por cada ventana de acuerdo a las contracciones, se puede determinar gracias a la mediana de las frecuencias en la forma como esta va disminuyendo como el musculo se va acercando acada vez mas a la fatiga, hasta llegar a la contraccion final donde la mediana de la frecuencia en la menor con un valor de 166.7 Hz. Confirmando lo que se consideró desde un inicio donde conforme se va aproximando el musculo a la fatiga muscular menor sera la frecuencia en su espectro.
 
