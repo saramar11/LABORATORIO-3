@@ -341,6 +341,9 @@ Para conocer el ancho del segmento, se utilizaron los contadores que se menciona
 
 Con el procedimiento realizado, las gráficas observadas y las ventanas aplicadas se puede determinar que a pesar de que al implementar la ventana hanning comienza a filtrar a partir desde el 0 mientras que la Hamming no, por esta razón se desea continuar con el procesamiento de la señal con la aplicación de las ventanas Hanning ya que provee un mayor suavizado a la señal EMG sin necesidad de perder información de mayor relevancia. 
 
+Una vez escogida este tipo de técnica para el aventanamiento, se realizó dentro de la misma definición de  la aplicación de esta el análisis espectral con el fin de que pudiera aplicarle el análisis espectral por cada ventana que marcaba una contracción.
+
+Se realizó una gráfica con cada contracción de su espectro de frecuencia. Con esto, dentro de esta misma función de aplicación de la ventana la mediana aritmética del valor de las frecuencias presentes en esa contracción esperando que conforme haya más contracciones habrá una disminución de esta marcando así la fatiga que tiene el músculo.
 
 Grafica para el analisis espectral de la ultima contracción:
 
