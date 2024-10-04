@@ -223,6 +223,16 @@ Con esto fue necesario realizar dos funciones en total, una que diera los criter
     b, a = butter(order, [low, high], btype='band')
     return b, a
 
+    Una vez establecido estos parámetros se utiliza la siguiente definición.
+
+	def butter_bandpass_filter(data, lowcut, highcut, fs, order=5):
+    b, a = butter_bandpass(lowcut, highcut, fs, order=order)
+    y = lfilter(b, a, data)  # Aplicar el filtro
+    return y
+
+En la cual, gracias a *lfilter* Se aplica el filtro respecto a la señal teniendo en cuenta los parámetros previamente establecidos por la anterior función. Con este filtro aplicado solo se podrán observar en las gráficas los datos de la señal EMG que se encuentren entre los 50 Hz a los 450 Hz lo cual según la bibliografía es donde se encuentra el canal de información de esta señal. [Frecuencias del EMG](http://http://repositorio.unicauca.edu.co:8080/bitstream/handle/123456789/5683/Anexos.pdf?sequence=2&isAllowed=y#:~:text=La%20frecuencia%20de%20una%20se%C3%B1al,del%20nivel%20de%20ruido%20el%C3%A9ctrico. "Frecuencias del EMG")
+
+
 
 Una vez con la señal filtrada se procede a realizar el aventanamiento de cada contracción, con esto en el main se llama a la definición de *hanning_window* y * hamming_window* con el fin de poder graficarlas con respecto a la señal filtrada original observando la forma en la que se suaviza la señal usando estas diferentes técnicas. 
 
